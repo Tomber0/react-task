@@ -28,41 +28,6 @@ const TermsOfUse = ( { onAccept }) => {
   );
 };
 
-
-
-
-const MainContent = () => {
-  const [imageList, setImages] = useState([]);
-  useEffect(() => {
-    async function getImages() {
-      const response = await fetch('http://localhost:8080/static/json/JSON_DATA.json');
-      const data = await response.json();
-      data.images.map((img,index)=>{
-        img.image_url = 'http://localhost:8080' + img.image_url;
-      });
-      setImages(data.images);
-    }
-    getImages();
-  }, []);
-
-  const saveImage = (image) => {
-    console.log(`Saving an ${image} to the file system...`);
-  };
-
-  return (
-    <div>
-      <h2>Main Content</h2>
-      <div>
-        {imageList.map((image, index) => (
-          <div key={index}>
-            <img src={image.image_url} alt={`${index + 1}`} />
-            <button onClick={() => saveImage(image.image_url)}>Save</button>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
 const ImageCollection = () => {
   const canvasRefs = useRef([]);
 
@@ -127,8 +92,6 @@ const ImageCollection = () => {
     </div>
   );
 };
-
-
 
 const App = () => {
   const [acceptedTerms, setAcceptedTerms] = useState(false);
